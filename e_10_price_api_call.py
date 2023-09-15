@@ -1,7 +1,6 @@
 import pytankerkoenig
 import datetime
 from datetime import *
-from config import *
 import json
 data = pytankerkoenig.getNearbyStations(API_KEY,'52.4819479','13.3213254','4','all','dist')
 
