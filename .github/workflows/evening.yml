@@ -1,0 +1,29 @@
+name: Scrape DB reviews only the first 3 pages trustpilot
+
+on:
+  schedule:
+    - cron: "0 19 * * *" # 19 p.m. every days
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+    - run: pip install requests bs4 pandas datetime pymongo
+    - name: Run scraper
+      env:
+        MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
+      run: python scrape_3_pages.py
+    - name: Add and commit	
+      run: |-	
+        git add .	
+        git config user.name "Automated"	
+        git config user.email "actions@users.noreply.github.com"	
+        timestamp=$(date -u)
+        git commit -m "Latest data: ${timestamp}" || exit 0 	
+    - name: Push	
+      run: git push
