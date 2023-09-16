@@ -2,6 +2,9 @@ import pytankerkoenig
 import datetime
 from datetime import *
 import json
+import os
+
+API_KEY = os.environ['API_KEY']
 data = pytankerkoenig.getNearbyStations(API_KEY,'52.4819479','13.3213254','4','all','dist')
 
 # Serializing json
