@@ -1,4 +1,4 @@
-name: Evening tankstellen price
+name: Cheapest gas station
 
 on:
   schedule:
