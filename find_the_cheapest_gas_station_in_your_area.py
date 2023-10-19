@@ -10,9 +10,11 @@ current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 # Load the existing dataset (if it exists)
 existing_data_file = "data/tankstellen_price_Stand.json"
 if os.path.exists(existing_data_file):
+    df_existing = pd.DataFrame()
     with open(existing_data_file, "r") as infile:
-        existing_data = json.load(infile)
-    df_existing = pd.DataFrame(existing_data)
+        for line in infile:
+            data = json.loads(line)
+            df_existing = df_existing.append(data, ignore_index=True)
 else:
     df_existing = pd.DataFrame()
 
