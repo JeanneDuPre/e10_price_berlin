@@ -13,11 +13,11 @@ jobs:
     - uses: actions/setup-python@v3
       with:
         python-version: '3.9'
-    - run: pip install pytankerkoenig pandas
+    - run: pip install pytankerkoenig
     - name: Run scraper
       env: 
         API_KEY: ${{ secrets.API_KEY }}
-      run: python find_the_cheapest_gas_station_in_your_area.py
+      run: python e_10_price_api_call.py
     - name: Add and commit	
       run: |-	
         git add .	
