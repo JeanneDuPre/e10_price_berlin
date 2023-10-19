@@ -24,6 +24,10 @@ new_data_df = pd.DataFrame(new_data)
 # Append the new data to the existing dataset
 df_combined = pd.concat([df_existing, new_data_df], ignore_index=True)
 
+# # Save the updated dataset
+# with open(existing_data_file, "w") as outfile:
+#     outfile.write(df_combined.to_json(orient='records', lines=True))
 # Save the updated dataset
 with open(existing_data_file, "w") as outfile:
-    outfile.write(df_combined.to_json(orient='records', lines=True))
+    for _, row in df_combined.iterrows():
+        outfile.write(json.dumps(row.to_dict()) + '\n')
